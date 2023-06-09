@@ -8,7 +8,7 @@ const navItems = [
 
 const Nav = () => {
   return (
-    <nav className="flex flex-row justify-between items-center bg-[#272c30] px-4 py-1 sticky ">
+    <nav className="flex flex-row justify-between top-0 left-0 items-center bg-[#272c30] px-4 py-1 sticky ">
       <div className="logo-container w-12 h-12">
         <img
           className="w-full"
