@@ -11,7 +11,7 @@ const Product = (props) => {
         <div className="content text-center p-2">
           <h2 className="font-bold text-lg uppercase">{name}</h2>
           <p className="">
-            <spna className="font-bold text-xl">$</spna>
+            <span className="font-bold text-xl">$</span>
             {price}
           </p>
         </div>
