@@ -25,7 +25,26 @@ const CartComponent = (props) => {
               <span className="text-4xl">$</span>
               {item.price}
             </p>
-            <input type="number" name="qty" id="qty" />
+            <div className="dropdown border-2 w-16 rounded-lg mt-4 bg-gray-200">
+              <label htmlFor="quantity">
+                <span>Qty:</span>
+              </label>
+              <select
+                className="bg-transparent outline-none"
+                name="quantity"
+                id="quantity"
+              >
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+              </select>
+            </div>
           </div>
         </div>
       ))}
