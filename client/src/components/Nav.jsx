@@ -9,14 +9,15 @@ const navItems = [
 const Nav = () => {
   return (
     <nav className="flex flex-row justify-between top-0 left-0 items-center bg-[#272c30] px-4 py-1 sticky ">
-      <div className="logo-container w-12 h-12">
-        <img
-          className="w-full"
-          src="../../assests/PNG Assets/Bag 2.png"
-          alt="AppLogo"
-        />
-        <div></div>
-      </div>
+      <NavLink to="/">
+        <div className="logo-container w-12 h-12">
+          <img
+            className="w-full"
+            src="../../assests/PNG Assets/Bag 2.png"
+            alt="AppLogo"
+          />
+        </div>
+      </NavLink>
       <div className="searchBar flex flex-row gap-2 ">
         <input
           className="px-4 w-72 h-9 py-2 border-[1px] text-[#000] placeholder:text-[#000] border-gray-400  rounded-lg bg-[#fff] outline-none"

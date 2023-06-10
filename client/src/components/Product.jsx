@@ -4,7 +4,7 @@ const Product = (props) => {
   const { id, name, price, imageUrl } = props.product;
   return (
     <div className="container flex flex-col  shadow-lg rounded-lg cursor-pointer w-36 items-center">
-      <Link to={`/products/${id}`}>
+      <Link to={`${id}`}>
         <div className="image w-32 h-22">
           <img src={imageUrl} alt="Laptop Image" />
         </div>

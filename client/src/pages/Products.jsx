@@ -43,10 +43,10 @@ const productItems = [
 
 const Products = () => {
   return (
-    <Card className="">
+    <Card>
       <h1 className="font-sarif font-semibold text-xl ">All Products</h1>
-      {productItems.map((item) => (
-        <Product key={item.id} product={item} />
+      {productItems.map((product) => (
+        <Product key={product.id} product={product} />
       ))}
     </Card>
   );

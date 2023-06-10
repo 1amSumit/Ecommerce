@@ -1,18 +1,13 @@
-import Products from "../components/Products";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
-    <>
-      <section className="Electronic Products flex flex-row flex-wrap">
-        <Products />
-        <Products />
-        <Products />
-      </section>
-
-      <main className="overflow-x-auto">
-        <Products />
-      </main>
-    </>
+    <Link
+      to={"products"}
+      className="bg-gray-700 text-white px-4 py-2 rounded-lg"
+    >
+      All products
+    </Link>
   );
 };
 
