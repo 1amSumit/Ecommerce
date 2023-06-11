@@ -1,19 +1,19 @@
 import { cartAction } from "../store/Cart";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 const ProductDetail = (props) => {
   const dispatch = useDispatch();
   const [addedToCart, setAddedToCart] = useState(false);
 
-  const { imageUrl, name, id, description, price } = props.product;
+  const { image, name, _id, description, price } = props.product;
 
   const addToCart = () => {
     dispatch(
       cartAction.addToCart({
-        id,
+        _id,
         name,
-        imageUrl,
+        image,
         description,
         price,
       })
@@ -27,7 +27,7 @@ const ProductDetail = (props) => {
     <>
       <div className="container grid grid-cols-2  ">
         <div className="imageSide items-center px-6 py-4">
-          <img src={imageUrl} className="w-[70%]" alt="Product Image" />
+          <img src={image} className="w-[70%]" alt="Product Image" />
         </div>
         <div className="totalSide  items-center p-8">
           <h1 className="font-semibold uppercase font-sans  text-4xl pb-1">

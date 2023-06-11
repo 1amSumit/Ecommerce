@@ -1,17 +1,25 @@
 import ProductDetail from "../components/ProductDetail";
-
-const product = {
-  id: 1,
-  name: "laptop",
-  imageUrl:
-    "https://cdn.thewirecutter.com/wp-content/media/2022/07/laptop-under-500-2048px-acer-1.jpg",
-  price: "34886",
-  description: "Hp laptop for gaming and entertainment",
-  tags: ["electronic", "laptop"],
-};
+import { json, useRouteLoaderData, Await } from "react-router-dom";
 
 const ProductDetails = () => {
-  return <ProductDetail product={product} />;
+  const { product } = useRouteLoaderData("product-load");
+  return (
+    <Await resolve={product}>
+      {(productLoad) => <ProductDetail product={productLoad} />}
+    </Await>
+  );
 };
 
 export default ProductDetails;
+
+export const loader = async ({ params, request }) => {
+  const res = await fetch(`http://localhost:8080/api/products/${params.id}`);
+
+  if (!res.ok) {
+    return json({ message: "Could not find the product" }, { status: 404 });
+  } else {
+    const data = await res.json();
+    console.log(data.data);
+    return data.data;
+  }
+};

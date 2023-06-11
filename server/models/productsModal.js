@@ -13,10 +13,7 @@ const productSchema = new mongoose.Schema({
     type: Number,
     requires: [true, "Product should have a price"],
   },
-  image: {
-    type: String,
-    requires: [true, "Product should have a image"],
-  },
+  image: String,
   createdAt: {
     type: Date,
     default: Date.now,

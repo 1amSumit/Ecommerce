@@ -1,55 +1,33 @@
-import { Link } from "react-router-dom";
-import Product from "../components/Product";
+/* eslint-disable react-refresh/only-export-components */
+import { json, defer, useLoaderData, Await } from "react-router-dom";
+import ProductsCmp from "../components/Products";
 import Card from "../UI/Card";
 
-const productItems = [
-  {
-    id: 1,
-    name: "laptop",
-    imageUrl:
-      "https://cdn.thewirecutter.com/wp-content/media/2022/07/laptop-under-500-2048px-acer-1.jpg",
-    price: "34886",
-    description: "Hp laptop for gaming and entertainment",
-    tags: ["electronic", "laptop"],
-  },
-  {
-    id: 2,
-    name: "laptop",
-    imageUrl:
-      "https://cdn.thewirecutter.com/wp-content/media/2022/07/laptop-under-500-2048px-acer-1.jpg",
-    price: "34886",
-    description: "Hp laptop for gaming and entertainment",
-    tags: ["electronic", "laptop"],
-  },
-  {
-    id: 3,
-    name: "laptop",
-    imageUrl:
-      "https://cdn.thewirecutter.com/wp-content/media/2022/07/laptop-under-500-2048px-acer-1.jpg",
-    price: "34886",
-    description: "Hp laptop for gaming and entertainment",
-    tags: ["electronic", "laptop"],
-  },
-  {
-    id: 4,
-    name: "laptop",
-    imageUrl:
-      "https://cdn.thewirecutter.com/wp-content/media/2022/07/laptop-under-500-2048px-acer-1.jpg",
-    price: "34886",
-    description: "Hp laptop for gaming and entertainment",
-    tags: ["electronic", "laptop"],
-  },
-];
-
 const Products = () => {
+  const { products } = useLoaderData();
   return (
-    <Card>
-      <h1 className="font-sarif font-semibold text-xl ">All Products</h1>
-      {productItems.map((product) => (
-        <Product key={product.id} product={product} />
-      ))}
-    </Card>
+    <Await resolve={products}>
+      {(loadedProducts) => <ProductsCmp products={loadedProducts} />}
+    </Await>
   );
 };
 
 export default Products;
+
+const loaderProducts = async () => {
+  const res = await fetch("http://localhost:8080/api/products");
+
+  if (!res.ok) {
+    return json({ message: "Couldn't find the products" }, { status: 404 });
+  } else {
+    const loadedEvents = await res.json();
+    console.log(loadedEvents.data);
+    return loadedEvents.data;
+  }
+};
+
+export const loader = async () => {
+  return defer({
+    products: loaderProducts(),
+  });
+};
