@@ -1,5 +1,28 @@
+import { cartAction } from "../store/Cart";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+
 const ProductDetail = (props) => {
+  const dispatch = useDispatch();
+  const [addedToCart, setAddedToCart] = useState(false);
+
   const { imageUrl, name, id, description, price } = props.product;
+
+  const addToCart = () => {
+    dispatch(
+      cartAction.addToCart({
+        id,
+        name,
+        imageUrl,
+        description,
+        price,
+      })
+    );
+
+    setAddedToCart(true);
+  };
+  const byeNow = () => {};
+
   return (
     <>
       <div className="container grid grid-cols-2  ">
@@ -16,10 +39,20 @@ const ProductDetail = (props) => {
             {price}
           </p>
           <div className="btns flex flex-row gap-2">
-            <button className="w-36 uppercase bg-[#555] hover:text-gray-700 hover:bg-neutral-300 duration-200 border-2 px-3 py-2 rounded-lg text-gray-100">
+            <button
+              onClick={byeNow}
+              className="w-36 uppercase bg-[#555] hover:text-gray-700 hover:bg-neutral-300 duration-200 border-2 px-3 py-2 rounded-lg text-gray-100"
+            >
               Bye now
             </button>
-            <button className=" text-gray-600 uppercase hover:bg-[#111] hover:text-gray-100 duration-200 border-2 px-3 py-2 rounded-lg  w-36">
+            <button
+              onClick={addToCart}
+              className=" text-gray-600 uppercase hover:bg-[#111] hover:text-gray-100 duration-200 border-2 px-4 py-2 rounded-lg  w-36 relative"
+              disabled={addedToCart}
+            >
+              {addedToCart && (
+                <span className="absolute top-0 right-0 ">✔️</span>
+              )}
               Add to Cart
             </button>
           </div>

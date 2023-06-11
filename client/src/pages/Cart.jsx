@@ -1,4 +1,5 @@
 import CartComponent from "../components/CartComponent";
+import { useLoaderData } from "react-router-dom";
 
 const products = [
   {

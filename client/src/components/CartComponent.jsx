@@ -1,7 +1,10 @@
 import Product from "./Product";
 
+import { useSelector } from "react-redux";
+
 const CartComponent = (props) => {
-  const cartProducts = props.product;
+  const items = useSelector((state) => state.cart.items);
+  const hasItem = useSelector((state) => state.cart.hasItem);
 
   return (
     <>
@@ -9,7 +12,7 @@ const CartComponent = (props) => {
         <h1 className="px-4 text-4xl font-semibold">Shopping Cart</h1>
         <div className="border"></div>
       </div>
-      {cartProducts.map((item, i) => (
+      {items.map((item, i) => (
         <div key={i} className="flex flex-row gap-6">
           <div className="image w-[20%]">
             <img
@@ -33,6 +36,7 @@ const CartComponent = (props) => {
                 className="bg-transparent outline-none"
                 name="quantity"
                 id="quantity"
+                defaultValue={1}
               >
                 <option value="0">0</option>
                 <option value="1">1</option>
@@ -49,9 +53,11 @@ const CartComponent = (props) => {
         </div>
       ))}
       <div className="justify-center py-4 items-center flex">
-        <button className="uppercase border-2 px-4 py-2 rounded-lg hover:bg-black hover:text-white duration-200">
-          Bye Now
-        </button>
+        {hasItem && (
+          <button className="uppercase border-2 px-4 py-2 rounded-lg hover:bg-black hover:text-white duration-200">
+            Bye Now
+          </button>
+        )}
       </div>
     </>
   );

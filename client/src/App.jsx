@@ -9,7 +9,6 @@ import Cart from "./pages/Cart";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
     children: [
       {
         index: true,
@@ -17,16 +16,22 @@ const router = createBrowserRouter([
       },
       {
         path: "products",
-        element: <Products />,
+        element: <Root />,
+        children: [
+          {
+            index: true,
+            element: <Products />,
+          },
+          { path: ":id", element: <ProductDetails /> },
+          { path: "cart", element: <Cart /> },
+        ],
       },
-      { path: "products/:id", element: <ProductDetails /> },
-      { path: "/cart", element: <Cart /> },
     ],
   },
 ]);
 
 const App = () => {
-  return <RouterProvider router={router}></RouterProvider>;
+  return <RouterProvider router={router} />;
 };
 
 export default App;

@@ -1,12 +1,13 @@
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const navItems = [
   { item: "Sign In", path: "/sign" },
   { item: "Retun & Orders", path: "/return" },
-  { item: "Cart", path: "/cart" },
 ];
 
 const Nav = () => {
+  const totalProducts = useSelector((state) => state.cart.totalProducts);
   return (
     <nav className="flex flex-row justify-between top-0 left-0 items-center bg-[#272c30] px-4 py-1 sticky ">
       <NavLink to="/">
@@ -32,13 +33,21 @@ const Nav = () => {
           Search
         </button>
       </div>
-      <div className="navItems ">
+      <div className="navItems item-center justify-center">
         <ul className="flex flex-col sm:flex-row gap-4 pr-14">
           {navItems.map((navItem, i) => (
             <li className="text-[#eee]" key={i}>
               <NavLink to={navItem.path}>{navItem.item}</NavLink>
             </li>
           ))}
+          <li className="text-[#eee] border-2 relative border-gray-700 px-2 py-1 rounded-lg">
+            <NavLink to="cart" className="m-2">
+              <span className="font-bold text-sm absolute top-0 right-0 ">
+                {totalProducts}
+              </span>
+              Cart
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>
